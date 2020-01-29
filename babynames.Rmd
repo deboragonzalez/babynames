@@ -21,27 +21,27 @@ babynames %>%
 
 
 ```{r}
-top_100 <- babynames %>%
+top_1000 <- babynames %>%
   filter(year == max(year)) %>%
   group_by(name)%>%
   # Don't care about gender here, so we group by name.
   summarise(total = sum(n))%>%
   arrange(desc(total))%>%
-  slice(1:100)
+  slice(1:1000)
 ```
 
 
 ```{r}
 
-babynames %>%
-  inner_join(top_100, by = "name") %>%
-  
+x <- babynames %>%
+  inner_join(top_1000, by = "name")
 
 ```
 
 ```{r}
-babynames %>%
-  group_by(name) %>%
+x %>%
+  filter(name == "Mary") %>%
+  ggplot(aes(year, n)) + geom_line()
   
 ```
 
