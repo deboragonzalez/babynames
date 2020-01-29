@@ -14,10 +14,36 @@ library(babynames)
 
 ```{r}
 babynames %>%
-  filter(name == "Debora")
+  filter(name == "Debora")%>% 
+  group_by("sex") %>%
+  ggplot(aes(year, n, fill = sex)) + geom_col()
 ```
 
 
+```{r}
+top_100 <- babynames %>%
+  filter(year == max(year)) %>%
+  group_by(name)%>%
+  # Don't care about gender here, so we group by name.
+  summarise(total = sum(n))%>%
+  arrange(desc(total))%>%
+  slice(1:100)
+```
+
+
+```{r}
+
+babynames %>%
+  inner_join(top_100, by = "name") %>%
+  
+
+```
+
+```{r}
+babynames %>%
+  group_by(name) %>%
+  
+```
 
 ## R Markdown
 
